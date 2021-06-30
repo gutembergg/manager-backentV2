@@ -1,0 +1,35 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Manager clients and projects",
+    "description": "Api of manager clients and projects for dèveloper",
+    "termsOfService": "http://example.com/terms/",
+    "contact": {
+      "name": "Gutembergue Mascarenhas",
+      "email": "gmascarenhas3001@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/api",
+      "description": "url of tests"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Register users",
+        "description": "create user in database",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

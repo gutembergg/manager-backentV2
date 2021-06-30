@@ -14,7 +14,7 @@ class SessionController {
       password
     })
 
-    return res.send(session)
+    return res.json(session)
   }
 }
 

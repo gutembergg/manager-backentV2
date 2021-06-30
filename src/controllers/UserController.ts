@@ -19,7 +19,7 @@ class UserController {
 
     delete user.password
 
-    return res.send(user)
+    return res.status(201).json(user)
   }
 
   public async enable(req: Request, res: Response): Promise<Response> {
@@ -36,7 +36,7 @@ class UserController {
 
     delete user.password
 
-    return res.send(user)
+    return res.json(user)
   }
 }
 

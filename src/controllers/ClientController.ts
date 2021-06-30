@@ -8,7 +8,7 @@ class ClientController {
 
     const clients = await clientRepository.findAll()
 
-    return res.send(clients)
+    return res.json(clients)
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
@@ -23,7 +23,7 @@ class ClientController {
       telephone
     })
 
-    return res.status(201).send(client)
+    return res.status(201).json(client)
   }
 }
 
