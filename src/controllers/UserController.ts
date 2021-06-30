@@ -36,7 +36,7 @@ class UserController {
 
     delete user.password
 
-    return res.json(user)
+    return res.status(201).json(user)
   }
 }
 
