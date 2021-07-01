@@ -1,4 +1,3 @@
-import { Response } from 'express'
 import AppErros from '../erros/AppErros'
 import Client from '../models/Client'
 import IClientsRepository from '../Repository/intefaces/IClientsRepository'
@@ -26,6 +25,10 @@ class UpdateClientService {
   }: Request): Promise<Client> {
     const client = await this._clientRepository.findById(id)
 
+    /*  if (id.length !== 36) {
+      throw new AppErros('Invailid ID', 401)
+    }
+ */
     if (!client) {
       throw new AppErros('Client not found', 400)
     }
@@ -47,3 +50,5 @@ class UpdateClientService {
     return client
   }
 }
+
+export default UpdateClientService

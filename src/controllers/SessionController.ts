@@ -14,7 +14,7 @@ class SessionController {
       password
     })
 
-    return res.json(session)
+    return res.status(200).json(session)
   }
 }
 

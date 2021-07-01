@@ -27,16 +27,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#components/schemas/User"
-              },
-              "examples": {
-                "user": {
-                  "value": {
-                    "name": "user example",
-                    "email": "useremail4@mail.com",
-                    "password": "123456"
-                  },
-                  "description": "You must change email for testing"
-                }
               }
             }
           }
@@ -74,6 +64,59 @@
           }
         }
       }
+    },
+    "/session": {
+      "post": {
+        "summary": "Authenticate user session",
+        "description": "Authenticte user if email and password",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Session"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "Authorizaded"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "patch": {
+        "summary": "activete / deactivate user",
+        "description": "Activate and deactivate in the case not utiliyation",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Activete user by ID",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Invailid Id"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -84,6 +127,17 @@
           "name": {
             "type": "string"
           },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
           "email": {
             "type": "string"
           },

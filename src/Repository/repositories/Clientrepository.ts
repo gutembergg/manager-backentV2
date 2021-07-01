@@ -13,12 +13,18 @@ class ClientRepository implements IClientsRepository {
   public async findAll(): Promise<Client[]> {
     return this.ormRepository.find()
   }
+
+  public async findAllPaginate(page: number): Promise<number | Client[]> {
+    throw new Error('Method not implemented.')
+  }
+
   public async findById(id: string): Promise<Client> {
     const client = await this.ormRepository.findOne({
       where: { id }
     })
     return client
   }
+
   public async findByEmail(email: string): Promise<Client> {
     const client = await this.ormRepository.findOne({
       where: { email }
@@ -40,6 +46,7 @@ class ClientRepository implements IClientsRepository {
 
     return client
   }
+
   public async save(client: Client): Promise<Client> {
     return this.ormRepository.save(client)
   }
