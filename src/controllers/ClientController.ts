@@ -3,6 +3,7 @@ import UpdateClientService from '../services/UpdateClientService'
 import ClientRepository from '../Repository/repositories/Clientrepository'
 import CreateClientService from '../services/CreateClientService'
 import PaginateClientService from '../services/PaginateClientService'
+import DeleteClientService from '../services/DeleteClientServe'
 
 class ClientController {
   public async index(req: Request, res: Response): Promise<Response> {
@@ -64,6 +65,16 @@ class ClientController {
     })
 
     return res.status(200).json(client)
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params
+    const clientRepository = new ClientRepository()
+    const deleteClientService = new DeleteClientService(clientRepository)
+
+    await deleteClientService.execute(id)
+
+    return res.status(204).send()
   }
 }
 

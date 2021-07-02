@@ -10,5 +10,6 @@ clientRoutes.get('/paginated', clientController.paginate)
 clientRoutes.get('/search', clientController.search)
 clientRoutes.post('/', clientController.create)
 clientRoutes.put('/:id', clientController.update)
+clientRoutes.delete('/:id', clientController.delete)
 
 export default clientRoutes

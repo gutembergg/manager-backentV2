@@ -23,7 +23,7 @@ class ClientRepository implements IClientsRepository {
 
   public async findAllByName(name: string): Promise<Client[]> {
     return this.ormRepository.find({
-      name: Like(`%${name.toLocaleLowerCase()}%`)
+      name: Like(`%${name}%`)
     })
   }
 
@@ -58,6 +58,10 @@ class ClientRepository implements IClientsRepository {
 
   public async save(client: Client): Promise<Client> {
     return this.ormRepository.save(client)
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id)
   }
 }
 
