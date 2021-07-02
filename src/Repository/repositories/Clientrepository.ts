@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm'
+import { getRepository, Like, Repository } from 'typeorm'
 import CreateClientDTO from '../../DTOS/CreateClientDTO'
 import Client from '../../models/Client'
 import IClientsRepository from '../intefaces/IClientsRepository'
@@ -14,8 +14,17 @@ class ClientRepository implements IClientsRepository {
     return this.ormRepository.find()
   }
 
-  public async findAllPaginate(page: number): Promise<number | Client[]> {
-    throw new Error('Method not implemented.')
+  public async findAllPaginated(page: number): Promise<[Client[], number]> {
+    return this.ormRepository.findAndCount({
+      skip: page,
+      take: 10
+    })
+  }
+
+  public async findAllByName(name: string): Promise<Client[]> {
+    return this.ormRepository.find({
+      name: Like(`%${name.toLocaleLowerCase()}%`)
+    })
   }
 
   public async findById(id: string): Promise<Client> {
