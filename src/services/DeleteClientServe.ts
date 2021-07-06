@@ -12,8 +12,6 @@ class DeleteClientService {
   public async execute(id: string): Promise<void> {
     const verifyId = await this._clentRepository.findById(id)
 
-    console.log('ID')
-
     if (!verifyId) {
       throw new AppErros('Client not found', 404)
     }

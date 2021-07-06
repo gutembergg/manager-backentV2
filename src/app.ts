@@ -5,6 +5,7 @@ import express, {
   Request,
   Response
 } from 'express'
+import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import 'express-async-errors'
 import './config/env'
@@ -18,6 +19,7 @@ createConnection()
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
