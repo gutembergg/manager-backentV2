@@ -8,6 +8,7 @@
     "standard",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
+    "prettier",
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -17,7 +18,8 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": "warn", //not working/////////////////////////
+    "@typescript-eslint/explicit-module-boundary-types": "error", //not working/////////////////////////
+    "@typescript-eslint/explicit-function-return-type": "error", //not working/////////////////////////
     "import/extensions": [
       "error",
       "ignorePackages",

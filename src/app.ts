@@ -1,13 +1,13 @@
 import 'reflect-metadata'
+import 'express-async-errors'
+import cors from 'cors'
 import express, {
   ErrorRequestHandler,
   NextFunction,
   Request,
   Response
 } from 'express'
-import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
-import 'express-async-errors'
 import './config/env'
 import createConnection from './database'
 import AppErros from './erros/AppErros'

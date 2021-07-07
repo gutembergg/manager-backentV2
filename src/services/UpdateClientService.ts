@@ -25,6 +25,8 @@ class UpdateClientService {
   }: Request): Promise<Client> {
     const client = await this._clientRepository.findById(id)
 
+    console.log(client)
+
     /*  if (id.length !== 36) {
       throw new AppErros('Invailid ID', 401)
     }

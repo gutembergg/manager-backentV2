@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateUser1624627163377 implements MigrationInterface {
+export class Project1625694122883 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'projects',
         columns: [
           {
             name: 'id',
@@ -19,18 +19,21 @@ export class CreateUser1624627163377 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true
+            name: 'client_id',
+            type: 'uuid'
           },
           {
-            name: 'password',
+            name: 'status',
             type: 'varchar'
           },
           {
-            name: 'active',
-            type: 'boolean',
-            default: true
+            name: 'logo',
+            type: 'varchar',
+            isNullable: true
+          },
+          {
+            name: 'description',
+            type: 'text'
           },
           {
             name: 'created_at',
@@ -42,13 +45,23 @@ export class CreateUser1624627163377 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()'
           }
+        ],
+        foreignKeys: [
+          {
+            name: 'projects_client',
+            columnNames: ['client_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'clients',
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE'
+          }
         ]
       })
     )
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users')
+    await queryRunner.dropTable('projects')
     await queryRunner.query('DROP EXTENSION "uuid-ossp"')
   }
 }

@@ -28,17 +28,15 @@ class ClientRepository implements IClientsRepository {
   }
 
   public async findById(id: string): Promise<Client> {
-    const client = await this.ormRepository.findOne({
+    return await this.ormRepository.findOne({
       where: { id }
     })
-    return client
   }
 
   public async findByEmail(email: string): Promise<Client> {
-    const client = await this.ormRepository.findOne({
+    return await this.ormRepository.findOne({
       where: { email }
     })
-    return client
   }
 
   public async create({
