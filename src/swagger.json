@@ -94,6 +94,7 @@
         "summary": "activete / deactivate user",
         "description": "Activate and deactivate in the case not utiliyation",
         "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "name": "id",
@@ -114,6 +115,34 @@
           },
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/clients": {
+      "post": {
+        "summary": "Register users",
+        "description": "create user in database",
+        "tags": ["Clients"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Clients"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Client exisits already"
+          },
+          "201": {
+            "description": "Client created with success"
+          },
+          "401": {
+            "description": "Error: Unauthorized"
           }
         }
       }
@@ -145,6 +174,27 @@
             "type": "string"
           }
         }
+      },
+      "Clients": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telephone": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

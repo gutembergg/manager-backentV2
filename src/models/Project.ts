@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm'
 import ProjectsStatus from '../enums/ProjectsStatus'
+import Client from './Client'
 
 @Entity('projects')
 class Project {
@@ -16,6 +19,10 @@ class Project {
 
   @Column()
   client_id: string
+
+  @ManyToOne(() => Client)
+  @JoinColumn({ name: 'client_id' })
+  client: string
 
   @Column({
     type: 'varchar'

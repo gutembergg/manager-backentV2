@@ -20,7 +20,7 @@ class CreateClientService {
     const verifyClient = await this._clientRepository.findByEmail(email)
 
     if (verifyClient) {
-      throw new AppErros('Client exisits already', 401)
+      throw new AppErros('Client exisits already', 400)
     }
 
     const client = await this._clientRepository.create({
