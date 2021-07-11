@@ -121,8 +121,8 @@
     },
     "/clients": {
       "post": {
-        "summary": "Register users",
-        "description": "create user in database",
+        "summary": "Register Client",
+        "description": "create client in database",
         "tags": ["Clients"],
         "security": [{ "bearerAuth": [] }],
         "requestBody": {

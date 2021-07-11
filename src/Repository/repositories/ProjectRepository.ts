@@ -1,4 +1,5 @@
 import { getRepository, Repository } from 'typeorm'
+import { RelationLoader } from 'typeorm/query-builder/RelationLoader'
 import CreateProjectDTO from '../../DTOS/CreateProjectDTO'
 import Project from '../../models/Project'
 import IProjectsRepository from '../intefaces/IProjectsRepository'
