@@ -6,9 +6,10 @@ import IProjectsRepository from '../Repository/intefaces/IProjectsRepository'
 
 interface Request {
   name: string
-  description: string
-  logo: string
   client_id: string
+  user_id: string
+  description: string
+  logo?: string
 }
 
 class CreateProjectService {
@@ -25,9 +26,10 @@ class CreateProjectService {
 
   public async execute({
     name,
+    client_id,
+    user_id,
     description,
-    logo,
-    client_id
+    logo
   }: Request): Promise<Project> {
     const verifyClient = this._clientRepository.findById(client_id)
 
@@ -37,10 +39,11 @@ class CreateProjectService {
 
     const project = await this._projectRepository.create({
       name,
-      description,
-      logo,
       client_id,
-      status: ProjectsStatus.NEW
+      user_id,
+      description,
+      status: ProjectsStatus.NEW,
+      logo
     })
 
     return project

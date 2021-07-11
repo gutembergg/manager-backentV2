@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import ProjectsStatus from '../enums/ProjectsStatus'
 import Client from './Client'
+import User from './User'
 
 @Entity('projects')
 class Project {
@@ -23,6 +24,13 @@ class Project {
   @ManyToOne(() => Client)
   @JoinColumn({ name: 'client_id' })
   client: string
+
+  @Column()
+  user_id: string
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User
 
   @Column({
     type: 'varchar'

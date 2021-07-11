@@ -13,6 +13,7 @@ import createConnection from './database'
 import AppErros from './erros/AppErros'
 import routes from './routes'
 import swaggerDocs from './swagger.json'
+import { resolve } from 'path'
 
 createConnection()
 
@@ -20,9 +21,8 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-
+app.use('/files', express.static(resolve(__dirname, '..', 'uploads')))
 app.use(routes)
 
 app.use(

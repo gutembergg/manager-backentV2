@@ -1,5 +1,4 @@
 import { getRepository, Repository } from 'typeorm'
-import { RelationLoader } from 'typeorm/query-builder/RelationLoader'
 import CreateProjectDTO from '../../DTOS/CreateProjectDTO'
 import Project from '../../models/Project'
 import IProjectsRepository from '../intefaces/IProjectsRepository'
@@ -26,6 +25,7 @@ class ProjectRepository implements IProjectsRepository {
   public async create({
     name,
     client_id,
+    user_id,
     description,
     logo,
     status
@@ -33,6 +33,7 @@ class ProjectRepository implements IProjectsRepository {
     const project = this.ormRepository.create({
       name,
       client_id,
+      user_id,
       description,
       logo,
       status

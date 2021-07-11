@@ -6,6 +6,7 @@ import ListAllProjectsService from '../services/ListAllProjectsService'
 import ShowProjectService from '../services/ShowProjectService'
 import UpdateProjectService from '../services/UpdateProjectService'
 import UpdateProjectStatusService from '../services/UpdateProjectStatusService'
+import UploadLogoOfProjectService from '../services/UploadLogoOfProjectService'
 
 class ProjectController {
   public async index(req: Request, res: Response): Promise<Response> {
@@ -18,7 +19,7 @@ class ProjectController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, client_id, description, logo } = req.body
+    const { name, client_id, description, user_id } = req.body
 
     const projectRepository = new ProjectRepository()
     const clientRepository = new ClientRepository()
@@ -32,10 +33,26 @@ class ProjectController {
       name,
       client_id,
       description,
-      logo
+      logo: req.file?.filename,
+      user_id
     })
 
     return res.status(201).json(project)
+  }
+
+  public async uploadLogo(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params
+    const { filename } = req.file
+
+    const projectrepository = new ProjectRepository()
+    const uploadLogoService = new UploadLogoOfProjectService(projectrepository)
+
+    const project = await uploadLogoService.execute({
+      id,
+      logo: filename
+    })
+
+    return res.json(project)
   }
 
   public async showProject(req: Request, res: Response): Promise<Response> {
