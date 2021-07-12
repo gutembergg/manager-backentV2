@@ -2,7 +2,8 @@ import { Request, Response } from 'express'
 import ClientRepository from '../Repository/repositories/Clientrepository'
 import ProjectRepository from '../Repository/repositories/ProjectRepository'
 import CreateProjectService from '../services/CreateProjectService'
-import ListAllProjectsService from '../services/ListAllProjectsService'
+import ListAllProjectsOfUserService from '../services/ListAllProjectsOfUserService'
+import PaginatedProjectsService from '../services/PaginatedProjectsService'
 import ShowProjectService from '../services/ShowProjectService'
 import UpdateProjectService from '../services/UpdateProjectService'
 import UpdateProjectStatusService from '../services/UpdateProjectStatusService'
@@ -10,10 +11,11 @@ import UploadLogoOfProjectService from '../services/UploadLogoOfProjectService'
 
 class ProjectController {
   public async index(req: Request, res: Response): Promise<Response> {
+    const { user_id } = req.params
     const projectRepository = new ProjectRepository()
-    const projectListService = new ListAllProjectsService(projectRepository)
+    const projectService = new ListAllProjectsOfUserService(projectRepository)
 
-    const projects = await projectListService.execute()
+    const projects = await projectService.execute(user_id)
 
     return res.status(200).json(projects)
   }
@@ -102,6 +104,19 @@ class ProjectController {
     })
 
     return res.json(project)
+  }
+
+  public async paginate(req: Request, res: Response): Promise<Response> {
+    const { page } = req.query
+
+    const projectRepository = new ProjectRepository()
+    const projectPaginated = new PaginatedProjectsService(projectRepository)
+
+    const paginated = await projectPaginated.execute({
+      page: page !== undefined ? parseInt(page.toString(), 10) : 0
+    })
+
+    return res.json(paginated)
   }
 }
 

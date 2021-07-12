@@ -32,7 +32,6 @@ class PaginateClientService {
       lastPage: page === totalPages - 1
     }
 
-    console.log('response:', response)
     return response
   }
 }

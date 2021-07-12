@@ -10,7 +10,8 @@ const projectController = new ProjectController()
 
 projectRoute.use(authenticate)
 
-projectRoute.get('/', projectController.index)
+projectRoute.get('/paginated', projectController.paginate)
+projectRoute.get('/users/:user_id', projectController.index)
 projectRoute.get('/:id', projectController.showProject)
 projectRoute.post(
   '/',

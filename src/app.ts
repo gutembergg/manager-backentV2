@@ -38,9 +38,7 @@ app.use(
         .json({ status: 'error', message: error.message })
     }
 
-    return res
-      .status(500)
-      .json({ status: 'error', message: 'Internal server error' })
+    return res.status(500).json({ status: 'error', message: error })
   }
 )
 

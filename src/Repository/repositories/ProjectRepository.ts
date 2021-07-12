@@ -22,6 +22,20 @@ class ProjectRepository implements IProjectsRepository {
     })
   }
 
+  public async findAllOfUser(user_id: string): Promise<Project[]> {
+    return await this.ormRepository.find({
+      relations: ['client'],
+      where: { user_id }
+    })
+  }
+
+  public async pagenatedProjects(page: number): Promise<[Project[], number]> {
+    return this.ormRepository.findAndCount({
+      skip: page,
+      take: 10
+    })
+  }
+
   public async create({
     name,
     client_id,
